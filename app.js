@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import leakRoutes from "./routes/ai/leak.js";
 import waterRoutes from "./routes/ai/water.js";
 
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.u98uice.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
+// const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.u98uice.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 
@@ -25,9 +25,9 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message });
 });
 
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
+// mongoose
+  // .connect(MONGODB_URI)
+  // .then(() => {
     app.listen(process.env.PORT || 3000);
-  })
-  .catch((err) => console.log(err));
+  // })
+  // .catch((err) => console.log(err));
