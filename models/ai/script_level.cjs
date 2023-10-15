@@ -1,4 +1,4 @@
-import * as tf from "@tensorflow/tfjs";
+const tf = require("@tensorflow/tfjs-node");
 
 async function loadModel() {
   try {
@@ -10,7 +10,7 @@ async function loadModel() {
   }
 }
 
-export const make_prediction_level = async (data) => {
+exports.make_prediction_level = async (data) => {
   try {
     const model = await loadModel();
 
