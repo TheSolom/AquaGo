@@ -10,7 +10,7 @@ async function loadModel() {
   }
 }
 
-export const make_prediction_treatment = async (data) => {
+export const make_prediction_quality = async (data) => {
   try {
     const model = await loadModel();
 

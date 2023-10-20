@@ -11,7 +11,7 @@ router.post("/portability", pages.postPortability);
 
 router.post("/level", pages.postLevel);
 
-router.post("/treatment", pages.postTreatment);
+router.post("/quality", pages.postQuality);
 
 router.post("/consumptionTank", pages.postConsumptionTank);
 
