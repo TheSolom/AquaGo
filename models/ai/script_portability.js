@@ -6,7 +6,7 @@ async function loadModel() {
       "https://raw.githubusercontent.com/TheSolom/Water_Tasks/79bec223efbaa26347e022030c5f6a328318c576/1.1%20Water%20Portability%20Prediction/model/model.json"
     );
   } catch (err) {
-    throw new Error("Model failed to load");
+    throw err;
   }
 }
 

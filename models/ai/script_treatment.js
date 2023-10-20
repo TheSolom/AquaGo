@@ -3,14 +3,14 @@ import * as tf from "@tensorflow/tfjs-node";
 async function loadModel() {
   try {
     return await tf.loadLayersModel(
-      "https://raw.githubusercontent.com/TheSolom/Water_Tasks/main/2.2%20Water%20leaks%20Detection/Hydrophone/Looped/model/model.json"
+      "https://raw.githubusercontent.com/TheSolom/Water-AI-Models/main/4.2%20water_treatment/model/model.json"
     );
   } catch (err) {
     throw err;
   }
 }
 
-export const make_prediction_hydLooped = async (data) => {
+export const make_prediction_treatment = async (data) => {
   try {
     const model = await loadModel();
 
