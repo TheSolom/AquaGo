@@ -1,87 +1,85 @@
-// import { validationResult } from "express-validator";
-// import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
-// import User from "../models/user.js";
+import { validationResult } from "express-validator";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-// export const signup = async (req, res, next) => {
-//   const errors = validationResult(req);
-//   try {
-//     if (!errors.isEmpty()) {
-//       const error = new Error(
-//         "Validation failed, Signing up data is incorrect"
-//       );
-//       error.statusCode = 422;
-//       error.data = errors.mapped();
-//       throw error;
-//     }
+import User from "../models/database/user.js";
 
-//     const { name, email, password } = req.body;
+export const signup = async (req, res, next) => {
+  const errors = validationResult(req);
+  try {
+    if (!errors.isEmpty()) {
+      const error = new Error(
+        "Validation failed, Signing up data is incorrect"
+      );
+      error.statusCode = 422;
+      error.data = errors.mapped();
+      throw error;
+    }
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     if (hashedPassword) {
-//       const newUser = new User({
-//         name,
-//         email,
-//         password: hashedPassword,
-//       });
-//       await newUser.save();
-//     }
+    const { name, email, password } = req.body;
 
-//     res.status(201).json({
-//       message: "User created successfully",
-//       userId: newUser._id,
-//     });
-//   } catch (err) {
-//     if (!err.statusCode) err.statusCode = 500;
-//     next(err);
-//   }
-// };
+    const hashedPassword = await bcrypt.hash(password, 10);
+    if (hashedPassword) {
+      const newUser = new User({
+        name,
+        email,
+        password: hashedPassword,
+      });
+      await newUser.save();
+    }
 
-// export const login = async (req, res, next) => {
-//   const errors = validationResult(req);
-//   try {
-//     if (!errors.isEmpty()) {
-//       const error = new Error(
-//         "Validation failed, Signing up data is incorrect"
-//       );
-//       error.statusCode = 422;
-//       error.data = errors.mapped();
-//       throw error;
-//     }
+    res.status(201).json({
+      message: "User created successfully",
+    });
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+};
 
-//     const { email, password } = req.body;
+export const login = async (req, res, next) => {
+  const errors = validationResult(req);
+  try {
+    if (!errors.isEmpty()) {
+      const error = new Error("Validation failed, Login data is incorrect");
+      error.statusCode = 422;
+      error.data = errors.mapped();
+      throw error;
+    }
 
-//     const user = await User.findOne({ email });
+    const { email, password } = req.body;
 
-//     if (!user) {
-//       const error = new Error("User not found");
-//       error.statusCode = 401;
-//       throw error;
-//     }
+    const user = await User.findOne({ email });
 
-//     const doMatch = await bcrypt.compare(password, user.password);
+    if (!user) {
+      const error = new Error("User not found");
+      error.statusCode = 401;
+      throw error;
+    }
 
-//     if (!doMatch) {
-//       const error = new Error("Wrong password");
-//       error.statusCode = 401;
-//       throw error;
-//     }
+    const doMatch = await bcrypt.compare(password, user.password);
 
-//     const token = jwt.sign(
-//       {
-//         email: user.email,
-//         userId: user._id.toString(),
-//       },
-//       "secret",
-//       { expiresIn: "1h" }
-//     );
+    if (!doMatch) {
+      const error = new Error("Wrong password");
+      error.statusCode = 401;
+      throw error;
+    }
 
-//     res.status(200).json({
-//       token: token,
-//       userId: user._id,
-//     });
-//   } catch (err) {
-//     if (!err.statusCode) err.statusCode = 500;
-//     next(err);
-//   }
-// };
+    const token = jwt.sign(
+      {
+        email: user.email,
+        userId: user._id.toString(),
+      },
+      "secret",
+      { expiresIn: "365d" }
+    );
+
+    res.status(200).json({
+      token: token,
+      userId: user._id,
+    });
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+};

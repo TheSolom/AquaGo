@@ -1,11 +1,11 @@
 import express from "express";
 
 import * as pages from "../../controllers/ai/water.js";
-// import { isAuth } from "../middlewares/is-auth.js";
+import { isAuth } from "../../middlewares/is-auth.js";
 
 const router = express.Router();
 
-// router.use(isAuth);
+router.use(isAuth);
 
 router.post("/portability", pages.postPortability);
 

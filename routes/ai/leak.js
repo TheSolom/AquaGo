@@ -1,11 +1,11 @@
 import express from "express";
 
 import * as leaks from "../../controllers/ai/leak.js";
-// import { isAuth } from "../middlewares/is-auth.js";
+import { isAuth } from "../../middlewares/is-auth.js";
 
 const router = express.Router();
 
-// router.use(isAuth);
+router.use(isAuth);
 
 router.post("/leak/accelerometerbranched", leaks.postAccBranched);
 
