@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "start-prod": "SET NODE_ENV=production&&SET MONGO_USER=EslamWater&&SET MONGO_PASSWORD=EslamWater&&SET MONGO_DEFAULT_DATABASE=AquaGo&&node app.js",
-    "start-server": "node app.js",
+    "start-server": "node app.js"
   },
   "author": "Islam Ashraf",
   "license": "ISC",
