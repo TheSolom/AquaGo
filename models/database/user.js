@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { consumptionSchema, pastConsumptionSchema } from "./consumption.js";
+
+const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -9,15 +11,16 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
+      unique: true,
       required: true,
     },
     password: {
       type: String,
       required: true,
     },
-    consumption_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Consumption",
+    consumption: {
+      currentConsumption: consumptionSchema,
+      pastConsumption: [pastConsumptionSchema],
     },
     map: {
       pins: [
@@ -32,4 +35,5 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
 export default mongoose.model("User", userSchema);

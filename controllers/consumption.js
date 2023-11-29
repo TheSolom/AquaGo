@@ -1,32 +1,53 @@
-import Consumption from "../models/database/consumption.js";
-
-export const getAllConsumption = async (req, res, next) => {
-  try {
-    const consumption = await Consumption.find();
-    res.status(200).json({ consumption });
-  } catch (err) {
-    next(new Error("Couldn't get all consumption"));
-  }
-};
+import User from "../models/database/user.js";
 
 export const getMyConsumption = async (req, res, next) => {
   try {
-    const consumption = await Consumption.find({ userId: req.userId });
-    res.status(200).json({ consumption });
+    const { userId } = req;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      const error = new Error("User not found");
+      error.statusCode = 404;
+      throw error;
+    }
+    
+    res.status(200).json({ consumption: user.consumption });
   } catch (err) {
     next(new Error("Couldn't get my consumption"));
   }
 };
 
-export const putMyConsumption = async (req, res, next) => {
+export const postMyConsumption = async (req, res, next) => {
   try {
-    const { current_consumption, max_consumption } = req.body;
+    const { consumption, goal } = req.body;
     const { userId } = req;
 
-    await Consumption.create({ current_consumption, max_consumption, userId });
+    const user = await User.findById(userId);
+    if (!user) {
+      const error = new Error("User not found");
+      error.statusCode = 404;
+      throw error;
+    }
 
-    res.status(201).json({ message: "Consumption added successfully" });
+    if (!user.consumption) {
+      user.consumption = {};
+    }
+
+    if (!user.consumption.currentConsumption) {
+      user.consumption.currentConsumption = {};
+    }
+
+    user.consumption.currentConsumption.currentConsumption = consumption;
+    if (goal) user.consumption.currentConsumption.goalConsumption = goal;
+    user.consumption.pastConsumption.push({
+      consumptionValue: consumption,
+    });
+
+    await user.save();
+
+    return res.status(201).json({ message: "Consumption added successfully" });
   } catch (err) {
+    console.error(err);
     next(new Error("Couldn't add consumption"));
   }
 };

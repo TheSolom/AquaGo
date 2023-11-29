@@ -1,7 +1,7 @@
 {
-  "name": "mobile",
+  "name": "aquasense",
   "version": "1.0.0",
-  "description": "AquaGo mobile app",
+  "description": "water management app",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -22,7 +22,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.1",
-    "nodemon": "^3.0.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

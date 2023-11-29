@@ -1,22 +1,26 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
 
-const consumptionSchema = new Schema(
+const { Schema } = mongoose;
+
+export const consumptionSchema = new Schema(
   {
-    current_consumption: {
+    currentConsumption: {
       type: Number,
       required: true,
     },
-    max_consumption: {
+    goalConsumption: {
       type: Number,
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Consumption", consumptionSchema);
+export const pastConsumptionSchema = new Schema({
+  consumptionValue: {
+    type: Number,
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
+});

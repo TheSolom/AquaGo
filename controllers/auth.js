@@ -76,7 +76,6 @@ export const login = async (req, res, next) => {
 
     res.status(200).json({
       token: token,
-      userId: user._id,
     });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;

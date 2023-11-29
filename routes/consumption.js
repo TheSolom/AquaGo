@@ -7,10 +7,8 @@ const router = express.Router();
 
 router.use(isAuth);
 
-router.get("/allconsumption", consumption.getAllConsumption);
-
 router.get("/myconsumption", consumption.getMyConsumption);
 
-router.put("/myconsumption", consumption.putMyConsumption);
+router.post("/myconsumption", consumption.postMyConsumption);
 
 export default router;
