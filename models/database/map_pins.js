@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const MapPinsSchema = new Schema(
   {
+    title: {
+      type: String,
+      default: "Water Source",
+    },
     X_axis: {
       type: Number,
       required: true,
@@ -20,4 +24,7 @@ const MapPinsSchema = new Schema(
   },
   { timestamps: true }
 );
+
+MapPinsSchema.index({ X_axis: 1, Y_axis: 1 });
+
 export default mongoose.model("MapPins", MapPinsSchema);

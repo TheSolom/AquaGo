@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 export const consumptionSchema = new Schema(
   {
-    currentConsumption: {
+    consumptionValue: {
       type: Number,
       required: true,
     },
-    goalConsumption: {
+    consumptionGoal: {
       type: Number,
     },
   },

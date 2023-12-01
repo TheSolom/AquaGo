@@ -20,10 +20,10 @@ export const getMyPins = async (req, res, next) => {
 
 export const postMyPins = async (req, res, next) => {
   try {
-    const { X_axis, Y_axis } = req.body;
+    const { title, X_axis, Y_axis } = req.body;
     const { userId } = req;
 
-    await MapPins.create({ X_axis, Y_axis, userId });
+    await MapPins.create({ title, X_axis, Y_axis, userId });
 
     res.status(201).json({ message: "Pin added successfully" });
   } catch (err) {

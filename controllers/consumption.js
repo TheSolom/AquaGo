@@ -10,16 +10,16 @@ export const getMyConsumption = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    
+
     res.status(200).json({ consumption: user.consumption });
   } catch (err) {
     next(new Error("Couldn't get my consumption"));
   }
 };
 
-export const postMyConsumption = async (req, res, next) => {
+export const putMyConsumption = async (req, res, next) => {
   try {
-    const { consumption, goal } = req.body;
+    const { consumption, goal } = req.params;
     const { userId } = req;
 
     const user = await User.findById(userId);
@@ -37,8 +37,10 @@ export const postMyConsumption = async (req, res, next) => {
       user.consumption.currentConsumption = {};
     }
 
-    user.consumption.currentConsumption.currentConsumption = consumption;
-    if (goal) user.consumption.currentConsumption.goalConsumption = goal;
+    user.consumption.currentConsumption.consumptionValue = consumption;
+    if (goal) {
+      user.consumption.currentConsumption.consumptionGoal = goal;
+    }
     user.consumption.pastConsumption.push({
       consumptionValue: consumption,
     });

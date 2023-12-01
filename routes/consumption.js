@@ -9,6 +9,6 @@ router.use(isAuth);
 
 router.get("/myconsumption", consumption.getMyConsumption);
 
-router.post("/myconsumption", consumption.postMyConsumption);
+router.put("/myconsumption/:consumption/:goal", consumption.putMyConsumption);
 
 export default router;
