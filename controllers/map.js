@@ -1,4 +1,4 @@
-import MapPins from "../models/database/map_pins.js";
+import MapPins from "../models/map-pins.js";
 
 export const getAllPins = async (req, res, next) => {
   try {

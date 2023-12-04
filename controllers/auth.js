@@ -2,7 +2,7 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import User from "../models/database/user.js";
+import User from "../models/user.js";
 
 export const signup = async (req, res, next) => {
   const errors = validationResult(req);

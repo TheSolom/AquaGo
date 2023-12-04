@@ -1,7 +1,7 @@
 import express from "express";
 
-import * as leaks from "../../controllers/ai/leak.js";
-import { isAuth } from "../../middlewares/is-auth.js";
+import * as leaks from "../controllers/AI-leak.js";
+import { isAuth } from "../middlewares/is-auth.js";
 
 const router = express.Router();
 

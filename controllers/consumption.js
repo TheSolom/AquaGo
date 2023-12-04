@@ -1,4 +1,4 @@
-import User from "../models/database/user.js";
+import User from "../models/user.js";
 
 export const getMyConsumption = async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ export const getMyConsumption = async (req, res, next) => {
 
 export const putMyConsumption = async (req, res, next) => {
   try {
-    const { consumption, goal } = req.params;
+    const { consumption, goal } = req.query;
     const { userId } = req;
 
     const user = await User.findById(userId);
@@ -29,21 +29,19 @@ export const putMyConsumption = async (req, res, next) => {
       throw error;
     }
 
-    if (!user.consumption) {
-      user.consumption = {};
-    }
-
-    if (!user.consumption.currentConsumption) {
+    if (!user.consumption) user.consumption = {};
+    if (!user.consumption.currentConsumption)
       user.consumption.currentConsumption = {};
-    }
 
-    user.consumption.currentConsumption.consumptionValue = consumption;
+    if (consumption) {
+      user.consumption.currentConsumption.consumptionValue = consumption;
+      user.consumption.pastConsumption.push({
+        consumptionValue: consumption,
+      });
+    }
     if (goal) {
       user.consumption.currentConsumption.consumptionGoal = goal;
     }
-    user.consumption.pastConsumption.push({
-      consumptionValue: consumption,
-    });
 
     await user.save();
 

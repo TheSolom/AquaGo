@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import waterRoutes from "./routes/ai/water.js";
-import leakRoutes from "./routes/ai/leak.js";
+import waterRoutes from "./routes/AI-water.js";
+import leakRoutes from "./routes/AI-leak.js";
 import authRoutes from "./routes/auth.js";
 import mapRoutes from "./routes/map.js";
 import consumptionRoutes from "./routes/consumption.js";
@@ -24,7 +24,7 @@ app.use(waterRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
-  
+
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
