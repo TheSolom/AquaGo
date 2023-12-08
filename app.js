@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import morgan from "morgan";
 
-import waterRoutes from "./routes/AI-water.js";
-import leakRoutes from "./routes/AI-leak.js";
 import authRoutes from "./routes/auth.js";
 import mapRoutes from "./routes/map.js";
 import consumptionRoutes from "./routes/consumption.js";
+import leakRoutes from "./routes/AI-leak.js";
+import waterRoutes from "./routes/AI-water.js";
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.lftjs0p.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 const app = express();
@@ -16,10 +17,13 @@ app.use(express.json());
 app.options("*", cors());
 app.use(cors());
 
+if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
+else app.use(morgan("combined"));
+
 app.use(authRoutes);
-app.use(consumptionRoutes);
 app.use(mapRoutes);
-app.use(leakRoutes);
+app.use(consumptionRoutes);
+app.use("/leak", leakRoutes);
 app.use(waterRoutes);
 
 app.use((error, req, res, next) => {

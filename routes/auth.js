@@ -6,6 +6,10 @@ import * as authController from "../controllers/auth.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to the AquaSense API" });
+});
+
 router.post(
   "/signup",
   [

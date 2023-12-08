@@ -29,10 +29,6 @@ export const putMyConsumption = async (req, res, next) => {
       throw error;
     }
 
-    if (!user.consumption) user.consumption = {};
-    if (!user.consumption.currentConsumption)
-      user.consumption.currentConsumption = {};
-
     if (consumption) {
       user.consumption.currentConsumption.consumptionValue = consumption;
       user.consumption.pastConsumption.push({

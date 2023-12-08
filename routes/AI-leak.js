@@ -7,16 +7,16 @@ const router = express.Router();
 
 router.use(isAuth);
 
-router.post("/leak/accelerometerbranched", leaks.postAccBranched);
+router.post("/accelerometerbranched", leaks.postAccBranched);
 
-router.post("/leak/accelerometerlooped", leaks.postAccLooped);
+router.post("/accelerometerlooped", leaks.postAccLooped);
 
-router.post("/leak/hydrophonebranched", leaks.postHydrophoneBranched);
+router.post("/hydrophonebranched", leaks.postHydrophoneBranched);
 
-router.post("/leak/hydrophonelooped", leaks.postHydrophoneLooped);
+router.post("/hydrophonelooped", leaks.postHydrophoneLooped);
 
-router.post("/leak/pressurebranched", leaks.postPressureBranched);
+router.post("/pressurebranched", leaks.postPressureBranched);
 
-router.post("/leak/pressurelooped", leaks.postPressureLooped);
+router.post("/pressurelooped", leaks.postPressureLooped);
 
 export default router;

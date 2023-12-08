@@ -19,7 +19,7 @@ const userSchema = new Schema(
       required: true,
     },
     consumption: {
-      currentConsumption: consumptionSchema,
+      currentConsumption: { type: consumptionSchema, default: {} },
       pastConsumption: [pastConsumptionSchema],
     },
     map: {

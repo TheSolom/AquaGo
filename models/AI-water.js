@@ -19,23 +19,3 @@ export async function loadLevelModel() {
     throw err;
   }
 }
-
-export async function loadQualityModel() {
-  try {
-    return await tf.loadLayersModel(
-      "https://raw.githubusercontent.com/TheSolom/Water-AI-Models/main/4.2%20Water%20Quality/model/model.json"
-    );
-  } catch (err) {
-    throw err;
-  }
-}
-
-export async function loadConsumptionModel() {
-  try {
-    return await tf.loadLayersModel(
-      "https://raw.githubusercontent.com/TheSolom/Water-AI-Models/main/3%20Predict%20Water%20Consumption/model/Tank%201/model.json"
-    );
-  } catch (err) {
-    throw err;
-  }
-}

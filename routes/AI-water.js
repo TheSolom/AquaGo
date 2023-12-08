@@ -11,8 +11,4 @@ router.post("/portability", pages.postPortability);
 
 router.post("/level", pages.postLevel);
 
-router.post("/quality", pages.postQuality);
-
-router.post("/consumptionTank", pages.postConsumptionTank);
-
 export default router;
