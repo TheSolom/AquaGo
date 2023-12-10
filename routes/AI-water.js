@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.use(isAuth);
 
-router.post("/portability", pages.postPortability);
+router.post("/potability", pages.postPortability);
 
 router.post("/level", pages.postLevel);
 
