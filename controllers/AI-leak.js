@@ -8,8 +8,15 @@ import {
 } from "../models/AI-leak.js";
 import { makePrediction } from "../utils/ModelPrediction.js";
 import { getMaxValueIndex } from "../utils/MaxValueIndex.js";
+import { checkModelInput } from "../utils/CheckModelInput.js";
 
 export const postAccBranched = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadAccBranchedModel();
 
   const prediction = makePrediction(model, req.body);
@@ -40,6 +47,12 @@ export const postAccBranched = async (req, res, next) => {
   res.status(200).json({ leakType });
 };
 export const postAccLooped = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadAccLoopedModel();
 
   const prediction = makePrediction(model, req.body);
@@ -71,6 +84,12 @@ export const postAccLooped = async (req, res, next) => {
 };
 
 export const postHydrophoneBranched = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadHydroBranchedModel();
 
   const prediction = makePrediction(model, req.body);
@@ -101,6 +120,12 @@ export const postHydrophoneBranched = async (req, res, next) => {
   res.status(200).json({ leakType });
 };
 export const postHydrophoneLooped = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadHydroLoopedModel();
 
   const prediction = makePrediction(model, req.body);
@@ -132,6 +157,12 @@ export const postHydrophoneLooped = async (req, res, next) => {
 };
 
 export const postPressureBranched = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadPressBranchedModel();
 
   const prediction = makePrediction(model, req.body);
@@ -162,6 +193,12 @@ export const postPressureBranched = async (req, res, next) => {
   res.status(200).json({ leakType });
 };
 export const postPressureLooped = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadPressLoopedModel();
 
   const prediction = makePrediction(model, req.body);

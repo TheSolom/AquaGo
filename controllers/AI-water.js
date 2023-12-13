@@ -3,8 +3,15 @@ import {
   makePrediction,
   makePredictionLevel,
 } from "../utils/ModelPrediction.js";
+import { checkModelInput } from "../utils/CheckModelInput.js";
 
 export const postPortability = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadPotabilityModel();
 
   const prediction = makePrediction(model, req.body);
@@ -13,6 +20,12 @@ export const postPortability = async (req, res, next) => {
 };
 
 export const postLevel = async (req, res, next) => {
+  try {
+    checkModelInput(req.body);
+  } catch (error) {
+    return next(error);
+  }
+
   const model = await loadLevelModel();
 
   const prediction = makePredictionLevel(model, req.body);
