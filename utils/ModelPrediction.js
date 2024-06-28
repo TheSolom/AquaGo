@@ -29,18 +29,3 @@ export function makePredictionLevel(model, data) {
     throw err;
   }
 }
-
-export function makePredictionConsumption(model, data) {
-  try {
-    let req_input = [];
-    for (const key in data) req_input.push(data[key]);
-
-    const input = tf.tensor([[req_input]]);
-
-    const output = model.predict(input);
-
-    return output.dataSync();
-  } catch (err) {
-    throw err;
-  }
-}
