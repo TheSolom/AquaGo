@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 else app.use(morgan("combined"));
 
 app.use(authRoutes);
-app.use(mapRoutes);
+app.use("/map", mapRoutes);
 app.use(consumptionRoutes);
 app.use("/leak", leakRoutes);
 app.use(waterRoutes);
