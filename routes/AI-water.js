@@ -7,8 +7,6 @@ const router = express.Router();
 
 router.use(isAuth);
 
-router.post("/potability", pages.postPortability);
-
 router.post("/level", pages.postLevel);
 
 export default router;
