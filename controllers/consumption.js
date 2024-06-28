@@ -30,11 +30,14 @@ export const putMyConsumption = async (req, res, next) => {
     }
 
     if (consumption) {
+      consumption = parseFloat(consumption.toFixed(2));
+
       user.consumption.currentConsumption.consumptionValue = consumption;
       user.consumption.pastConsumption.push({
         consumptionValue: consumption,
       });
     }
+
     if (goal) {
       user.consumption.currentConsumption.consumptionGoal = goal;
     }
