@@ -31,7 +31,7 @@ export function checkModelInput(data) {
 }
 
 function validateNumber(key, value, min, max) {
-  if (typeof value !== "number" || isNaN(value)) {
+  if (typeof value !== "number" || Number.isNaN(value)) {
     throw new Error(`Field ${key} must be a number.`);
   } else if (value < min || value > max) {
     throw new Error(`Field ${key} must be a number between ${min} and ${max}.`);
