@@ -30,11 +30,11 @@ export const putMyConsumption = async (req, res, next) => {
     }
 
     if (consumption) {
-      consumption = parseFloat(consumption.toFixed(2));
+      const consumptionRounded = parseFloat(parseFloat(consumption).toFixed(2));
 
-      user.consumption.currentConsumption.consumptionValue = consumption;
+      user.consumption.currentConsumption.consumptionValue = consumptionRounded;
       user.consumption.pastConsumption.push({
-        consumptionValue: consumption,
+        consumptionValue: consumptionRounded,
       });
     }
 
